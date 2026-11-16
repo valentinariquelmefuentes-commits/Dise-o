@@ -3,35 +3,27 @@
 En este documento se indican las librerías, herramientas externas y recursos utilizados durante el desarrollo del prototipo, explicando para qué se usaron y cómo fueron adaptados al proyecto.
 
 ## 1. Librerías utilizadas
-### OneWire
 
+### OneWire
 **Fuente:** librería OneWire, desarrollada por Paul Stoffregen.
 
-**Uso en el proyecto:**  
 Se utilizó para permitir la comunicación entre el ESP32 y los sensores de temperatura DS18B20 mediante el protocolo 1-Wire.
 
-**Adaptación realizada:**  
 Se configuró la librería según los pines utilizados en nuestro circuito y se trabajó en conjunto con la librería DallasTemperature para obtener las mediciones de temperatura.
 
 ### DallasTemperature
-
 **Fuente:** Arduino Temperature Control Library.
 
-**Uso en el proyecto:**  
 Se utilizó para obtener las mediciones de los sensores DS18B20. Primero se probó con un solo sensor y posteriormente se incorporó un segundo sensor para medir la temperatura de la superficie y la temperatura del agua.
 
-**Adaptación realizada:**  
 Se programaron lecturas periódicas en grados Celsius y se utilizaron estos valores dentro de la lógica de funcionamiento del sistema. También se agregó la detección de error `DEVICE_DISCONNECTED_C`, que permite identificar cuando alguno de los sensores se encuentra desconectado o no entrega una lectura válida.
 
 
 ### BluetoothSerial
-
 **Fuente:** librería BluetoothSerial incluida en Arduino-ESP32.
 
-**Uso en el proyecto:**  
 Se utilizó para incorporar comunicación inalámbrica al prototipo y poder enviar los datos obtenidos por el sistema.
 
-**Adaptación realizada:**  
 Se configuró el dispositivo con el nombre `Compresa_ESP32` y se programó el envío de la temperatura de superficie, temperatura del agua y estado de la bomba.
 
 ## 2. Desarrollo del código
