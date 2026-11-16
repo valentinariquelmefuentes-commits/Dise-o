@@ -1,4 +1,4 @@
-##Compresa Inteligente - TEI201
+## Compresa Inteligente - TEI201
 
 Descripción
 Este repositorio contiene el desarrollo del prototipo Alpha de una compresa con circulación de líquido y monitoreo de temperatura, diseñada como propuesta para el enfriamiento inicial controlado de quemaduras térmicas.
