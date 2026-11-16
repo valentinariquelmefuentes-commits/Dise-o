@@ -1,5 +1,3 @@
-Y este es el código final que use para poder conectarlo a bluetooth:
-
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include "BluetoothSerial.h"
