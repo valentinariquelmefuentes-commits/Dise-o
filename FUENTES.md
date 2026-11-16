@@ -52,7 +52,7 @@ Las distintas versiones utilizadas durante este proceso se encuentran guardadas 
 
 ## 3. Uso de inteligencia artificial
 
-### ChatGPT — OpenAI
+### ChatGPT 
 
 ChatGPT se utilizó como herramienta de apoyo durante el desarrollo del prototipo y su documentación.
 
