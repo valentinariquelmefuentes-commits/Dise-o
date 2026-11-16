@@ -58,6 +58,7 @@ Principalmente se utilizó para:
 - interpretar algunos errores que aparecieron al cargar el código en el ESP32;
 - organizar la estructura del repositorio GitHub;
 - apoyar la redacción de documentación técnica del proyecto.
+- apoyar con la realización de diagramas
 
 Las respuestas entregadas por la herramienta fueron revisadas y adaptadas de acuerdo con los componentes, conexiones y pruebas realizadas por el equipo. Los códigos fueron probados progresivamente con el hardware disponible y se realizaron cambios según los resultados obtenidos.
 
