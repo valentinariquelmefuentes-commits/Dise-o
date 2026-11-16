@@ -3,7 +3,6 @@
 En este documento se indican las librerías, herramientas externas y recursos utilizados durante el desarrollo del prototipo, explicando para qué se usaron y cómo fueron adaptados al proyecto.
 
 ## 1. Librerías utilizadas
-
 ### OneWire
 
 **Fuente:** librería OneWire, desarrollada por Paul Stoffregen.
@@ -13,8 +12,6 @@ Se utilizó para permitir la comunicación entre el ESP32 y los sensores de temp
 
 **Adaptación realizada:**  
 Se configuró la librería según los pines utilizados en nuestro circuito y se trabajó en conjunto con la librería DallasTemperature para obtener las mediciones de temperatura.
-
----
 
 ### DallasTemperature
 
@@ -26,7 +23,6 @@ Se utilizó para obtener las mediciones de los sensores DS18B20. Primero se prob
 **Adaptación realizada:**  
 Se programaron lecturas periódicas en grados Celsius y se utilizaron estos valores dentro de la lógica de funcionamiento del sistema. También se agregó la detección de error `DEVICE_DISCONNECTED_C`, que permite identificar cuando alguno de los sensores se encuentra desconectado o no entrega una lectura válida.
 
----
 
 ### BluetoothSerial
 
