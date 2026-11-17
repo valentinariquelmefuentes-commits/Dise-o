@@ -1,71 +1,94 @@
 # Fuentes, librerías y herramientas utilizadas
 
-En este documento se indican las librerías, herramientas externas y recursos utilizados durante el desarrollo del prototipo, explicando para qué se usaron y cómo fueron adaptados al proyecto.
+En este documento se presentan las librerías, herramientas y recursos utilizados durante el desarrollo de la compresa inteligente Alpha, explicando su función y adaptación al prototipo.
 
 ## 1. Librerías utilizadas
 
 ### OneWire
-**Fuente:** librería OneWire, desarrollada por Paul Stoffregen.
+**Fuente:** OneWire Library, desarrollada por Paul Stoffregen.
 
-Se utilizó para permitir la comunicación entre el ESP32 y los sensores de temperatura DS18B20 mediante el protocolo 1-Wire.
+Se utilizó para establecer la comunicación entre el ESP32 y los sensores de temperatura DS18B20 mediante el protocolo 1-Wire.
 
-Se configuró la librería según los pines utilizados en nuestro circuito y se trabajó en conjunto con la librería DallasTemperature para obtener las mediciones de temperatura.
+Se configuró el bus de comunicación en el GPIO 27, permitiendo conectar dos sensores a una misma línea de datos.
 
 ### DallasTemperature
-**Fuente:** Arduino Temperature Control Library.
+**Fuente:** DallasTemperature, Arduino Temperature Control Library.
 
-Se utilizó para obtener las mediciones de los sensores DS18B20. Primero se probó con un solo sensor y posteriormente se incorporó un segundo sensor para medir la temperatura de la superficie y la temperatura del agua.
+Se utilizó para obtener las mediciones de temperatura de los sensores DS18B20.
 
-Se programaron lecturas periódicas en grados Celsius y se utilizaron estos valores dentro de la lógica de funcionamiento del sistema. También se agregó la detección de error `DEVICE_DISCONNECTED_C`, que permite identificar cuando alguno de los sensores se encuentra desconectado o no entrega una lectura válida.
+Inicialmente se trabajó con un sensor y posteriormente se incorporó un segundo para medir la temperatura de la superficie y del agua.
 
+Se programaron lecturas periódicas en grados Celsius y se incorporó la detección del valor `DEVICE_DISCONNECTED_C` para identificar lecturas inválidas o sensores desconectados.
 
 ### BluetoothSerial
-**Fuente:** librería BluetoothSerial incluida en Arduino-ESP32.
+**Fuente:** librería BluetoothSerial incluida en el paquete Arduino-ESP32 de Espressif Systems.
 
-Se utilizó para incorporar comunicación inalámbrica al prototipo y poder enviar los datos obtenidos por el sistema.
+Se utilizó para implementar comunicación inalámbrica mediante Bluetooth clásico entre el ESP32 y un dispositivo receptor.
 
-Se configuró el dispositivo con el nombre `Compresa_ESP32` y se programó el envío de la temperatura de superficie, temperatura del agua y estado de la bomba.
+Se configuró el nombre `Compresa_ESP32` y se programó el envío de las temperaturas de superficie y agua, junto con el estado de la bomba.
 
-## 2. Desarrollo del código
+## 2. Herramientas de programación
 
-El código se desarrolló de forma progresiva, probando primero los componentes por separado y después integrándolos.
+### Arduino IDE
+**Fuente:** Arduino.
 
-Las principales etapas fueron:
+Se utilizó como entorno de desarrollo para escribir, compilar y cargar los programas en el ESP32, además de realizar pruebas y corregir errores.
 
-1. Prueba inicial del ESP32 mediante el monitor serial.
+### Arduino-ESP32
+**Fuente:** Espressif Systems.
+
+Se utilizó el paquete de soporte para placas ESP32, que permite programar el microcontrolador desde Arduino IDE y utilizar sus funciones de entrada, salida y comunicación.
+
+### Monitor Serial
+**Fuente:** herramienta integrada en Arduino IDE.
+
+Se utilizó para observar las mediciones de temperatura, comprobar el funcionamiento del código e identificar posibles errores durante las pruebas.
+
+## 3. Desarrollo y adaptación del código
+
+El código se desarrolló progresivamente mediante pruebas individuales de los componentes y su posterior integración.
+
+Las etapas documentadas fueron:
+
+1. Prueba inicial del ESP32 mediante el Monitor Serial.
 2. Incorporación de un sensor DS18B20 para medir temperatura.
-3. Prueba de la salida utilizada para controlar el MOSFET.
-4. Incorporación de una lógica automática para determinar el estado ON/OFF de la bomba según la temperatura.
-5. Incorporación de una condición de seguridad para detectar la desconexión del sensor y establecer la bomba en OFF.
-6. Incorporación de un segundo sensor DS18B20 para medir la temperatura de superficie y del agua.
-7. Incorporación de comunicación Bluetooth para enviar las mediciones y el estado del sistema.
+3. Prueba de la señal GPIO 26 destinada al control del actuador mediante MOSFET.
+4. Incorporación de la lógica automática de encendido y apagado según la temperatura.
+5. Incorporación de una condición de seguridad ante lecturas inválidas del sensor.
+6. Incorporación de un segundo DS18B20 para medir la temperatura de superficie y del agua.
+7. Incorporación de comunicación Bluetooth para transmitir las mediciones y el estado del sistema.
 
-Las distintas versiones utilizadas durante este proceso se encuentran guardadas en la carpeta `firmware/`.
+En el diseño electrónico actualizado se considera reemplazar el MOSFET por un relé optoacoplado de un canal compatible con señales de control de 3,3 V.
 
-## 3. Uso de inteligencia artificial
+Las distintas versiones del programa se encuentran documentadas en la carpeta `firmware/`.
 
-### ChatGPT 
+## 4. Uso de inteligencia artificial
 
-ChatGPT se utilizó como herramienta de apoyo durante el desarrollo del prototipo y su documentación.
+### ChatGPT
+**Fuente:** OpenAI.
 
-Principalmente se utilizó para:
+ChatGPT se utilizó como herramienta de apoyo durante el desarrollo del prototipo y la preparación de su documentación técnica.
 
-- ayudar a ordenar y revisar el código;
-- resolver dudas sobre el uso de los sensores DS18B20;
-- apoyar la programación de la lógica de control de temperatura;
-- agregar y revisar la condición de seguridad ante fallas de los sensores;
-- apoyar la incorporación de comunicación Bluetooth;
-- interpretar algunos errores que aparecieron al cargar el código en el ESP32;
-- organizar la estructura del repositorio GitHub;
-- apoyar la redacción de documentación técnica del proyecto.
-- apoyar con la realización de diagramas
+Sus principales aplicaciones fueron:
 
-Las respuestas entregadas por la herramienta fueron revisadas y adaptadas de acuerdo con los componentes, conexiones y pruebas realizadas por el equipo. Los códigos fueron probados progresivamente con el hardware disponible y se realizaron cambios según los resultados obtenidos.
+- Apoyar la organización y revisión del código.
+- Resolver dudas sobre el funcionamiento de los sensores DS18B20.
+- Apoyar la programación de la lógica de control de temperatura.
+- Revisar la condición de seguridad ante fallas de los sensores.
+- Apoyar la incorporación de comunicación Bluetooth.
+- Interpretar errores de programación y carga del código.
+- Apoyar la elaboración de diagramas y esquemáticos electrónicos.
+- Organizar la estructura del repositorio GitHub.
+- Apoyar la redacción y revisión de documentación técnica y protocolos experimentales.
 
-## 4. Código y recursos externos
+Las respuestas fueron revisadas y adaptadas de acuerdo con los componentes, conexiones y pruebas realizadas durante el desarrollo del prototipo.
+
+## 5. Código y recursos externos
 
 No se utilizó un repositorio externo completo como base del proyecto.
 
-Las funciones utilizadas para leer los sensores y realizar la comunicación Bluetooth provienen de las librerías mencionadas anteriormente y fueron integradas dentro del código desarrollado para el prototipo.
+Las funciones de lectura de temperatura y comunicación Bluetooth se implementaron utilizando las librerías mencionadas anteriormente, integradas en el código desarrollado para el prototipo.
 
-En caso de utilizar posteriormente otros tutoriales, códigos externos o repositorios, estos serán agregados a este documento indicando su fuente y el uso que tuvieron dentro del proyecto.
+El esquema electrónico se elaboró considerando las conexiones y características técnicas de los componentes seleccionados.
+
+Los recursos externos adicionales que se utilicen en futuras versiones serán incorporados a este documento, indicando su procedencia, finalidad y adaptaciones realizadas.
